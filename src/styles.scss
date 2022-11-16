@@ -23,3 +23,20 @@
   --color-orange-20: #FEEBC8;
   --color-orange-80: #91472C;
 }
+
+@font-face {
+  font-family: "Inter";
+  src: url(./assets/fonts/Inter-Regular.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url(./assets/fonts/Inter-Medium.ttf) format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
