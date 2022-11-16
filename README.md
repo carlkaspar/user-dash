@@ -1,7 +1,7 @@
 ## TASKS
 ### Setup
- - [ ] Setup jest
- - [ ] Setup storybook
+ - [x] Setup jest
+ - [x] Setup storybook
 ### Global styles
  - [ ] Color variables
 ### UI Components
