@@ -3,7 +3,7 @@
  - [x] Setup jest
  - [x] Setup storybook
 ### Global styles
- - [ ] Color variables
+ - [x] Color variables
 ### UI Components
  - [ ] Button
  - [ ] Icon/Icon with text
