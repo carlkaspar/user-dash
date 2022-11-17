@@ -8,7 +8,7 @@
 ### UI Components
  - [x] Button
  - [x] Icon/Icon with text
- - [ ] Search
+ - [x] Search
  - [ ] Tag
  - [ ] Checkbox
  - [ ] Avatar
