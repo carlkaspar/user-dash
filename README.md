@@ -2,10 +2,11 @@
 ### Setup
  - [x] Setup jest
  - [x] Setup storybook
+ - [ ] Setup svg registry && import svg icons
 ### Global styles
  - [x] Color variables
 ### UI Components
- - [ ] Button
+ - [x] Button
  - [ ] Icon/Icon with text
  - [ ] Search
  - [ ] Tag
