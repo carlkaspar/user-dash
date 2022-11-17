@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: '',
+  template: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {}

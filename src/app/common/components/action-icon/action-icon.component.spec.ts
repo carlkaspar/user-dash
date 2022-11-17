@@ -1,8 +1,9 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { ButtonComponent } from "./button.component";
+import {ActionIconComponent} from "./action-icon.component";
+import {IconSpriteModule} from 'ng-svg-icon-sprite';
 
-describe('ButtonComponent', () => {
+describe('AcationIconComponent', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
@@ -10,8 +11,9 @@ describe('ButtonComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         TestHostComponent,
-        ButtonComponent
-      ]
+        ActionIconComponent
+      ],
+      imports: [IconSpriteModule]
     });
 
     fixture = TestBed.createComponent(TestHostComponent);
@@ -21,32 +23,37 @@ describe('ButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeDefined();
-    expect(component.buttonComponent).toBeDefined();
+    expect(component.actionIconComponent).toBeDefined();
+  });
+
+  it('should display icon', () => {
+    expect(component.actionIconElementRef.nativeElement.querySelector('svg-icon-sprite')).toBeDefined();
   });
 
   it('should have inner text', () => {
-    expect(component.buttonElementRef.nativeElement.innerHTML.trim())
+    expect(component.actionIconElementRef.nativeElement.querySelector('.icon-title').innerHTML.trim())
       .toBe(component.mockButtonText);
   });
 
   it('should call emit clicks', () => {
     jest.spyOn(component, 'onClick');
-    component.buttonElementRef.nativeElement.click();
+    component.actionIconElementRef.nativeElement.click();
     expect(component.onClick).toHaveBeenCalled();
   });
 });
 
 @Component({
   template: `
-    <button app-button-primary
+    <button app-action-icon
+      [iconName]="'trash'"
+      [title]="mockButtonText"
       (click)="onClick()">
-      {{mockButtonText}}
     </button>
   `
 })
 class TestHostComponent {
-  @ViewChild(ButtonComponent) buttonComponent: ButtonComponent;
-  @ViewChild(ButtonComponent, {read: ElementRef}) buttonElementRef: ElementRef<HTMLButtonElement>;
+  @ViewChild(ActionIconComponent) actionIconComponent: ActionIconComponent;
+  @ViewChild(ActionIconComponent, {read: ElementRef}) actionIconElementRef: ElementRef<HTMLButtonElement>;
 
   mockButtonText = 'Mock text';
 
