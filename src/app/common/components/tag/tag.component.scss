@@ -1,0 +1,28 @@
+:host {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 3px 8px;
+  border-radius: 4px;
+
+
+  &.purple {
+    background-color: var(--color-purple-20);
+    color: var(--color-purple-80);
+  }
+
+  &.orange {
+    background-color: var(--color-orange-20);
+    color: var(--color-orange-80);
+  }
+
+  &.blue {
+    background-color: var(--color-blue-20);
+    color: var(--color-blue-80);
+  }
+
+  &.pink {
+    background-color: var(--color-pink-20);
+    color: var(--color-pink-80);
+  }
+}
