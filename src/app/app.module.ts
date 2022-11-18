@@ -10,7 +10,9 @@ import {ButtonComponent} from './common/components/button/button.component';
 import {CheckBoxComponent} from './common/components/checkbox/checkbox.component';
 import {SearchComponent} from './common/components/search/search.component';
 import {TagComponent} from './common/components/tag/tag.component';
-import {UserListItemComponent} from './user-dashboard/user-list-item/user-list-item.component';
+import {UserListItemComponent} from './user-dashboard/components/user-list-item/user-list-item.component';
+import {UserListComponent} from './user-dashboard/components/user-list/user-list.component';
+import {UserService} from './user-dashboard/services/user.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import {UserListItemComponent} from './user-dashboard/user-list-item/user-list-i
     TagComponent,
     CheckBoxComponent,
     AvatarComponent,
-    UserListItemComponent
+    UserListItemComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,9 @@ import {UserListItemComponent} from './user-dashboard/user-list-item/user-list-i
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
