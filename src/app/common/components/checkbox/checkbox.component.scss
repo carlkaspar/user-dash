@@ -1,0 +1,35 @@
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  height: 16px;
+  width: 16px;
+  border: solid 1px var(--color-gray-40);
+  border-radius: 3px;
+  display: grid;
+  place-content: center;
+
+  &:hover {
+    border-color: var(--color-gray-50);
+  }
+}
+
+.checkbox::before {
+  width: 10px;
+  height: 8px;
+  clip-path: path(
+    "M7.85328 0.808227C8.26211 0.376547 8.95503 0.394793 9.34058 0.847391L9.40737 0.925794C9.74294 1.31973 9.72254 1.90461 9.36033 2.2742L4.76472 6.96348C4.3726 7.36359 3.72832 7.36355 3.33624 6.96341L0.653528 4.22548C0.28558 3.84996 0.271242 3.25365 0.620715 2.86088L0.667947 2.8078C1.05892 2.36838 1.74285 2.35966 2.14491 2.78896L4.05045 4.82358L7.85328 0.808227Z"
+  );
+  content: "";
+  background-color: var(--color-white);
+  transform: scale(0);
+}
+
+.checkbox:checked {
+  background-color: var(--color-brand-50);
+  border-color: var(--color-brand-50);
+}
+
+.checkbox:checked::before {
+  transform: scale(1);
+} 

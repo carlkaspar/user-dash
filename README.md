@@ -9,8 +9,8 @@
  - [x] Button
  - [x] Icon/Icon with text
  - [x] Search
- - [ ] Tag
- - [ ] Checkbox
+ - [x] Tag
+ - [x] Checkbox
  - [ ] Avatar
  - [ ] UserListItem
  - [ ] UserList
