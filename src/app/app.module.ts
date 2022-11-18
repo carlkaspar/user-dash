@@ -5,6 +5,7 @@ import {IconSpriteModule} from 'ng-svg-icon-sprite';
 
 import { AppComponent } from './app.component';
 import {ActionIconComponent} from './common/components/action-icon/action-icon.component';
+import {AvatarComponent} from './common/components/avatar/avatar.component';
 import {ButtonComponent} from './common/components/button/button.component';
 import {CheckBoxComponent} from './common/components/checkbox/checkbox.component';
 import {SearchComponent} from './common/components/search/search.component';
@@ -17,7 +18,8 @@ import {TagComponent} from './common/components/tag/tag.component';
     ActionIconComponent,
     SearchComponent,
     TagComponent,
-    CheckBoxComponent
+    CheckBoxComponent,
+    AvatarComponent
   ],
   imports: [
     BrowserModule,

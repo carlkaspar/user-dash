@@ -11,7 +11,7 @@
  - [x] Search
  - [x] Tag
  - [x] Checkbox
- - [ ] Avatar
+ - [x] Avatar
  - [ ] UserListItem
  - [ ] UserList
  - [ ] User list skeleton
