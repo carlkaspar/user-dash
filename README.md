@@ -12,7 +12,7 @@
  - [x] Tag
  - [x] Checkbox
  - [x] Avatar
- - [ ] UserListItem
+ - [x] UserListItem
  - [ ] UserList
  - [ ] User list skeleton
 ### Services

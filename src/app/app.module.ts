@@ -10,6 +10,7 @@ import {ButtonComponent} from './common/components/button/button.component';
 import {CheckBoxComponent} from './common/components/checkbox/checkbox.component';
 import {SearchComponent} from './common/components/search/search.component';
 import {TagComponent} from './common/components/tag/tag.component';
+import {UserListItemComponent} from './user-dashboard/user-list-item/user-list-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {TagComponent} from './common/components/tag/tag.component';
     SearchComponent,
     TagComponent,
     CheckBoxComponent,
-    AvatarComponent
+    AvatarComponent,
+    UserListItemComponent
   ],
   imports: [
     BrowserModule,

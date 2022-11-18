@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, HostBinding } from "@angular/core";
+import {TagColor} from "../../types/tag-color.type";
 
 @Component({
   selector: 'app-tag',
@@ -12,5 +13,5 @@ export class TagComponent {
   }
 
   @Input() title: string;
-  @Input() theme: 'pink' | 'purple' | 'blue' | 'orange';
+  @Input() theme: TagColor;
 }

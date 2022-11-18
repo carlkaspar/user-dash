@@ -1,0 +1,1 @@
+export type TagColor = 'pink' | 'purple' | 'blue' | 'orange';

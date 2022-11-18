@@ -1,0 +1,54 @@
+:host {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  padding: 16px;
+  border-radius: 4px;
+  border-left: 4px solid transparent;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 21px;
+
+    .name-email {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .name {
+      color: var(--color-gray-80);
+      font-weight: 500;
+    }
+
+    .email {
+      color: var(--color-gray-60);
+    }
+  }
+
+  .actions {
+    position: absolute;
+    right: 16px;
+
+    display: flex;
+    gap: 5px;
+    height: 100%;
+    align-items: center;
+    transform: scale(0);
+  }
+
+  &:hover, &.checked {
+    background-color: var(--color-gray-10);
+    border-color: var(--color-brand-50);
+  }
+
+  &:hover {
+    .actions {
+      transform: scale(1);
+    }
+  }
+}
