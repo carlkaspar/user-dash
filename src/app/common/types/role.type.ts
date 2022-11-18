@@ -1,0 +1,1 @@
+export type Role = 'AGENT' | 'ADMIN' | 'EXTERNAL_REVIEWER' | 'ACCOUNT_MANAGER';
