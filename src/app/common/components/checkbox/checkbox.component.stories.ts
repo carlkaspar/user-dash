@@ -1,4 +1,4 @@
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Meta, moduleMetadata, Story} from "@storybook/angular";
 import {CheckBoxComponent} from "./checkbox.component";
 
@@ -23,5 +23,5 @@ export const Default: Story<CheckBoxComponent> = Template.bind({});
 
 export const Checked: Story<CheckBoxComponent> = Template.bind({});
 Checked.args = {
-  checked: true
+  checkboxControl: new FormControl(true)
 };
