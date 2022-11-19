@@ -18,6 +18,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http'
 import {userDashboardState} from './user-dashboard/state/user-dashboard.reducer';
 import {UserDashboardEffects} from './user-dashboard/state/user-dashboard.effects';
+import {UserDashboardComponent} from './user-dashboard/components/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {UserDashboardEffects} from './user-dashboard/state/user-dashboard.effect
     CheckBoxComponent,
     AvatarComponent,
     UserListItemComponent,
-    UserListComponent
+    UserListComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
