@@ -2,7 +2,29 @@
   display: flex;
   flex-direction: column;
   padding: 30px;
+  margin: 0 auto;
   height: calc(100vh - 60px);
+  max-width: 1000px;
 
   background-color: var(--color-gray-bg);
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0 30px;
+
+    .title {
+      font-size: 18px;
+      line-height: 27px;
+      font-weight: 500;
+      color: var(--color-gray-90);
+    }
+  }
+
+  .header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
 }
