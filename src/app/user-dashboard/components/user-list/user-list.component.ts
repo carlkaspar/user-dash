@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import {FormControl} from "@angular/forms";
-import {Observable, takeUntil} from "rxjs";
+import {map, Observable, takeUntil} from "rxjs";
 import {User} from "src/app/common/models/user.model";
 import {Destroyable} from "src/app/common/utils/destroyable";
 import {UserStoreFacade} from "../../services/user-store.facade";
@@ -8,14 +8,29 @@ import {UserStoreFacade} from "../../services/user-store.facade";
 @Component({
   selector: 'app-user-list',
   template: `
+    <div class="list-header">
+      <span class="header-count">{{(selectedUserCount$ | async)}} {{(selectedUserCount$ | async) === 1 ? 'user' : 'users'}} selected</span>
+      <div class="header-actions">
+        <button app-action-icon
+          [iconName]="'pencil'"
+          [title]="'Edit'">
+        </button>
+        <button app-action-icon
+          [iconName]="'trash'"
+          [title]="'Delete'">
+        </button>
+      </div>
+    </div>
     <div class="list-filters">
       <app-checkbox [formControl]="masterCheckboxControl"></app-checkbox>
       <span>User</span>
       <span>Permission</span>
     </div>
-    <app-user-list-item *ngFor="let user of (users$ | async)"
-      [user]="user">
-    </app-user-list-item>
+    <div class="list-items-container">
+      <app-user-list-item *ngFor="let user of (users$ | async)"
+        [user]="user">
+      </app-user-list-item>
+    </div>
   `,
   styleUrls: ['./user-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,6 +38,9 @@ import {UserStoreFacade} from "../../services/user-store.facade";
 export class UserListComponent extends Destroyable {
   users$: Observable<User[]> = this.userStoreFacade.select.users();
   masterCheckboxControl = new FormControl(false);
+  selectedUserCount$ = this.userStoreFacade.select.selectedUserIds().pipe(
+    map(userIds => userIds.length)
+  );
 
   constructor(private userStoreFacade: UserStoreFacade) {
     super();
