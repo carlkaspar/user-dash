@@ -1,11 +1,18 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import {Observable, of} from "rxjs";
+import {FormControl} from "@angular/forms";
+import {Observable, takeUntil} from "rxjs";
 import {User} from "src/app/common/models/user.model";
-import {UserService} from "../../services/user.service";
+import {Destroyable} from "src/app/common/utils/destroyable";
+import {UserStoreFacade} from "../../services/user-store.facade";
 
 @Component({
   selector: 'app-user-list',
   template: `
+    <div class="list-filters">
+      <app-checkbox [formControl]="masterCheckboxControl"></app-checkbox>
+      <span>User</span>
+      <span>Permission</span>
+    </div>
     <app-user-list-item *ngFor="let user of (users$ | async)"
       [user]="user">
     </app-user-list-item>
@@ -13,8 +20,17 @@ import {UserService} from "../../services/user.service";
   styleUrls: ['./user-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserListComponent {
-  users$: Observable<User[]> = this.userService.getUsers();
+export class UserListComponent extends Destroyable {
+  users$: Observable<User[]> = this.userStoreFacade.select.users();
+  masterCheckboxControl = new FormControl(false);
 
-  constructor(private userService: UserService) {}
+  constructor(private userStoreFacade: UserStoreFacade) {
+    super();
+
+    this.userStoreFacade.dispatch.loadUsers();
+
+    this.masterCheckboxControl.valueChanges.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe()
+  }
 }

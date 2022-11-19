@@ -3,7 +3,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {IconSpriteModule} from 'ng-svg-icon-sprite';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {ActionIconComponent} from './common/components/action-icon/action-icon.component';
 import {AvatarComponent} from './common/components/avatar/avatar.component';
 import {ButtonComponent} from './common/components/button/button.component';
@@ -13,6 +13,11 @@ import {TagComponent} from './common/components/tag/tag.component';
 import {UserListItemComponent} from './user-dashboard/components/user-list-item/user-list-item.component';
 import {UserListComponent} from './user-dashboard/components/user-list/user-list.component';
 import {UserService} from './user-dashboard/services/user.service';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {HttpClientModule} from '@angular/common/http'
+import {userDashboardState} from './user-dashboard/state/user-dashboard.reducer';
+import {UserDashboardEffects} from './user-dashboard/state/user-dashboard.effects';
 
 @NgModule({
   declarations: [
@@ -28,9 +33,14 @@ import {UserService} from './user-dashboard/services/user.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IconSpriteModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      userState: userDashboardState
+    }),
+    EffectsModule.forRoot([UserDashboardEffects])
   ],
   providers: [
     UserService

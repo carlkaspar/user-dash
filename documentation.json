@@ -1,0 +1,1971 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "User",
+            "id": "interface-User-c1ad5a3dbaab6752853ee7368e97406b4615fd82e76dd231c1e7d2af132c742415dfdc652112637814684a3bb9baa2e97c227c8b51f6878cbadaa17d4b0410fc",
+            "file": "src/app/common/models/user.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {Role} from \"../types/role.type\";\r\n\r\nexport interface User {\r\n  id: number;\r\n  name: string;\r\n  email: string;\r\n  avatar: string;\r\n  role: Role;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "avatar",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "email",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "role",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Role",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "Destroyable",
+            "id": "injectable-Destroyable-185d2876e2576da546a8ca4b21d0ab53bc1443e3f79e699605b871d8ce1f3cb34d7e6ec8c986ded662dc82cc2ea6d6338fbeb3cf4f8ae556ee410ef422655add",
+            "file": "src/app/common/utils/destroyable.ts",
+            "properties": [
+                {
+                    "name": "destroyed$",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Subject<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 6,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Subject} from 'rxjs';\r\nimport {OnDestroy, Injectable} from '@angular/core';\r\n\r\n@Injectable()\r\nexport abstract class Destroyable implements OnDestroy {\r\n  public destroyed$: Subject<any>;\r\n\r\n  constructor() {\r\n    this.destroyed$ = new Subject();\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    this.destroyed$.next(null);\r\n    this.destroyed$.complete();\r\n  }\r\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 6
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "UserService",
+            "id": "injectable-UserService-e3e6d51317137f28e16ed7fe124f58df814adb29eabc0ab29ab893f1e86a5077d2b0f9e9b4e42c4296ff9f0c58313e305fcfabf9e4ef1a30f199ca8b52aa4ebe",
+            "file": "src/app/user-dashboard/services/user.service.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "getUsers",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<User[]>",
+                    "typeParameters": [],
+                    "line": 9,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Injectable} from \"@angular/core\"\r\nimport {Observable, of} from \"rxjs\";\r\nimport {User} from \"src/app/common/models/user.model\";\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class UserService {\r\n  getUsers(): Observable<User[]> {\r\n    return of([\r\n      {\r\n        id: 10001,\r\n        name: \"Geraldine Daniel\",\r\n        email: \"Estelle_Crona@example.org\",\r\n        avatar: \"https://randomuser.me/api/portraits/men/32.jpg\",\r\n        role: \"ADMIN\"\r\n      },\r\n      {\r\n        id: 10002,\r\n        name: \"Hugh Graham\",\r\n        email: \"Roxanne30@example.com\",\r\n        avatar: \"https://randomuser.me/api/portraits/women/44.jpg\",\r\n        role: \"AGENT\"\r\n      },\r\n      {\r\n        id: 10003,\r\n        name: \"Johnathan Feeney\",\r\n        email: \"Junius35@example.org\",\r\n        avatar: \"https://randomuser.me/api/portraits/men/46.jpg\",\r\n        role: \"ACCOUNT_MANAGER\"\r\n      }\r\n    ]);\r\n  }\r\n}",
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "ActionIconComponent",
+            "id": "component-ActionIconComponent-4b3cfe4db5cd5cdbf82a3e1425d6cd8a808f0d89edff28fe8989d61c6877be0c271f817ff5161468c62d0aa6961bc3678d14352aafaff3c36d032e2ef092377f",
+            "file": "src/app/common/components/action-icon/action-icon.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "button[app-action-icon]",
+            "styleUrls": [
+                "./action-icon.component.scss"
+            ],
+            "styles": [],
+            "template": "<div class=\"icon-container\">\n  <svg-icon-sprite [src]=\"iconPath\"></svg-icon-sprite>\n</div>\n<span *ngIf=\"title\" class=\"icon-title\">{{title}}</span>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "iconName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "\"trash\" | \"pencil\"",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from \"@angular/core\";\r\n\r\n@Component({\r\n  selector: 'button[app-action-icon]',\r\n  template: `\r\n    <div class=\"icon-container\">\r\n      <svg-icon-sprite [src]=\"iconPath\"></svg-icon-sprite>\r\n    </div>\r\n    <span *ngIf=\"title\" class=\"icon-title\">{{title}}</span>\r\n  `,\r\n  styleUrls: ['./action-icon.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class ActionIconComponent {\r\n  @Input() iconName: 'trash' | 'pencil';\r\n  @Input() title: string;\r\n\r\n  get iconPath() {\r\n    return `assets/sprites/sprite.svg#${this.iconName}`\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  background-color: var(--color-white);\r\n  border: solid 1px var(--color-gray-30);\r\n  border-radius: 4px;\r\n  padding: 0;\r\n  height: 32px;\r\n\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\r\n\r\n  box-shadow: 0px 1px 2px rgba(45, 55, 72, 0.08);\r\n\r\n  .icon-container {\r\n    height: 32px;\r\n    width: 32px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n  }\r\n\r\n  svg-icon-sprite {\r\n    color: var(--color-white);\r\n    stroke: var(--color-gray-50);\r\n    width: 16px;\r\n    height: 16px;\r\n  }\r\n\r\n  .icon-title {\r\n    margin-right: 8px;\r\n    color: var(--color-gray-70);\r\n    font-weight: 500;\r\n    font-size: 14px;\r\n  }\r\n}",
+                    "styleUrl": "./action-icon.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "accessors": {
+                "iconPath": {
+                    "name": "iconPath",
+                    "getSignature": {
+                        "name": "iconPath",
+                        "type": "",
+                        "returnType": "",
+                        "line": 18
+                    }
+                }
+            }
+        },
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-c33f7cce0043afa2fc545fab018003396c227aee8d8703077ec64348267dd6e1d4e03e47cef033cca451fc78fc6417371d33dd05b1b3fa60fca7390805f8b2c0",
+            "file": "src/app/app.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<app-user-list></app-user-list>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  template: `\r\n    <app-user-list></app-user-list>\r\n  `,\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class AppComponent {}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": ""
+        },
+        {
+            "name": "AvatarComponent",
+            "id": "component-AvatarComponent-ccc653f94fffbd24fff890f47cbf31d4d44f4e78061847b36dc75f311807c51828aed291a5d5da52c929ba015998cb3ea4bfdb97af419e951911f4df780bcb14",
+            "file": "src/app/common/components/avatar/avatar.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-avatar",
+            "styleUrls": [
+                "./avatar.component.scss"
+            ],
+            "styles": [],
+            "template": "<img [src]=\"src\" class=\"avatar-image\">\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "src",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from \"@angular/core\";\r\n\r\n@Component({\r\n  selector: 'app-avatar',\r\n  template: `\r\n    <img [src]=\"src\" class=\"avatar-image\">\r\n  `,\r\n  styleUrls: ['./avatar.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class AvatarComponent {\r\n  @Input() src: string;\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  height: 32px;\r\n  width: 32px;\r\n\r\n  .avatar-image {\r\n    height: 32px;\r\n    width: 32px;\r\n    object-fit: cover;\r\n    border-radius: 100%;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./avatar.component.scss"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-8c2ee94703001b0c5900fc3f0666bee6c079723bd857c4d6ad181ce30c76eb91a062b3f765178c3d6e27080a287a200dfcb21b746a82343f759c1470588d6024",
+            "file": "src/app/common/components/button/button.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "button[app-button-primary]",
+            "styleUrls": [
+                "./button.component.scss"
+            ],
+            "styles": [],
+            "template": "<ng-content></ng-content>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component } from \"@angular/core\";\r\n\r\n@Component({\r\n  selector: 'button[app-button-primary]',\r\n  template: `<ng-content></ng-content>`,\r\n  styleUrls: ['./button.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class ButtonComponent {}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host[app-button-primary] {\r\n  background-color: var(--color-brand-50);\r\n  color: var(--color-white);\r\n  font-size: 14px;\r\n  font-weight: 500;\r\n  padding: 9.5px 12px;\r\n  border: none;\r\n  border-radius: 4px;\r\n  line-height: 21px;\r\n}\r\n",
+                    "styleUrl": "./button.component.scss"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "CheckBoxComponent",
+            "id": "component-CheckBoxComponent-a8485d04cf5844704d5c8f98417bf18b7718e1cacd9223359dec6646729948105971843c09cf80a1668c019a4ce0d7cb75b6dbab60c922f98b355a5ee3c58672",
+            "file": "src/app/common/components/checkbox/checkbox.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: CheckBoxComponent, multi: true\n}",
+                    "type": "component"
+                }
+            ],
+            "selector": "app-checkbox",
+            "styleUrls": [
+                "./checkbox.component.scss"
+            ],
+            "styles": [],
+            "template": "<input\n  type=\"checkbox\"\n  class=\"checkbox\"\n  [formControl]=\"checkboxControl\"\n  (blur)=\"onBlur()\"\n/>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "checkboxControl",
+                    "defaultValue": "new FormControl()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 27
+                },
+                {
+                    "name": "onBlur",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "destroyed$",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Subject<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 6,
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "Destroyable"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "registerOnChange",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 34,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnTouched",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setDisabledState",
+                    "args": [
+                        {
+                            "name": "isDisabled",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": true,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "isDisabled",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "writeValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "Destroyable"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, ChangeDetectionStrategy, Input } from \"@angular/core\";\r\nimport {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from \"@angular/forms\";\r\nimport {takeUntil} from \"rxjs\";\r\nimport {Destroyable} from \"../../utils/destroyable\";\r\n\r\n@Component({\r\n  selector: 'app-checkbox',\r\n  template: `\r\n    <input\r\n      type=\"checkbox\"\r\n      class=\"checkbox\"\r\n      [formControl]=\"checkboxControl\"\r\n      (blur)=\"onBlur()\"\r\n    />\r\n  `,\r\n  styleUrls: ['./checkbox.component.scss'],\r\n  providers: [\r\n    {\r\n      provide: NG_VALUE_ACCESSOR,\r\n      useExisting: CheckBoxComponent,\r\n      multi: true\r\n    }\r\n  ],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class CheckBoxComponent extends Destroyable implements ControlValueAccessor {\r\n  checkboxControl = new FormControl();\r\n\r\n  onBlur: () => {};\r\n\r\n  writeValue(value: boolean): void {\r\n    this.checkboxControl.setValue(value);\r\n  }\r\n  registerOnChange(fn: any): void {\r\n    this.checkboxControl.valueChanges.pipe(\r\n      takeUntil(this.destroyed$)\r\n    ).subscribe(fn);\r\n  }\r\n  registerOnTouched(fn: any): void {\r\n    this.onBlur = fn;\r\n  }\r\n  setDisabledState?(isDisabled: boolean): void {\r\n    isDisabled ?\r\n      this.checkboxControl.disable() :\r\n      this.checkboxControl.enable();\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".checkbox {\r\n  appearance: none;\r\n  -webkit-appearance: none;\r\n  margin: 0;\r\n  height: 16px;\r\n  width: 16px;\r\n  border: solid 1px var(--color-gray-40);\r\n  border-radius: 3px;\r\n  display: grid;\r\n  place-content: center;\r\n\r\n  &:hover {\r\n    border-color: var(--color-gray-50);\r\n  }\r\n}\r\n\r\n.checkbox::before {\r\n  width: 10px;\r\n  height: 8px;\r\n  clip-path: path(\r\n    \"M7.85328 0.808227C8.26211 0.376547 8.95503 0.394793 9.34058 0.847391L9.40737 0.925794C9.74294 1.31973 9.72254 1.90461 9.36033 2.2742L4.76472 6.96348C4.3726 7.36359 3.72832 7.36355 3.33624 6.96341L0.653528 4.22548C0.28558 3.84996 0.271242 3.25365 0.620715 2.86088L0.667947 2.8078C1.05892 2.36838 1.74285 2.35966 2.14491 2.78896L4.05045 4.82358L7.85328 0.808227Z\"\r\n  );\r\n  content: \"\";\r\n  background-color: var(--color-white);\r\n  transform: scale(0);\r\n}\r\n\r\n.checkbox:checked {\r\n  background-color: var(--color-brand-50);\r\n  border-color: var(--color-brand-50);\r\n}\r\n\r\n.checkbox:checked::before {\r\n  transform: scale(1);\r\n} ",
+                    "styleUrl": "./checkbox.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "extends": "Destroyable",
+            "implements": [
+                "ControlValueAccessor"
+            ]
+        },
+        {
+            "name": "SearchComponent",
+            "id": "component-SearchComponent-90077b18a0f746bfe6495c2c73c201949b35835b0320a5e67343797a4ceebe6cde5f5e89775cdc05400374372dda5caa5ea6bb59fa60bdc4587bd49be45ba2ad",
+            "file": "src/app/common/components/search/search.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-search",
+            "styleUrls": [
+                "./search.component.scss"
+            ],
+            "styles": [],
+            "template": "<svg-icon-sprite class=\"search-icon\" [src]=\"searchIconPath\"></svg-icon-sprite>\n<input class=\"search-input\" placeholder=\"Search\">\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "searchIconPath",
+                    "defaultValue": "'assets/sprites/sprite.svg#search'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "modifierKind": [
+                        144
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, ChangeDetectionStrategy } from \"@angular/core\";\r\n\r\n@Component({\r\n  selector: 'app-search',\r\n  template: `\r\n    <svg-icon-sprite class=\"search-icon\" [src]=\"searchIconPath\"></svg-icon-sprite>\r\n    <input class=\"search-input\" placeholder=\"Search\">\r\n  `,\r\n  styleUrls: ['./search.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class SearchComponent {\r\n  readonly searchIconPath = 'assets/sprites/sprite.svg#search';\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  align-items: center;\r\n  gap: 12px;\r\n\r\n  height: 40px;\r\n  width: 204px;\r\n\r\n  border: 1px solid var(--color-gray-30);\r\n  border-radius: 4px;\r\n\r\n  color: var(--color-gray-50);\r\n  font-size: 14px;\r\n  padding: 2px 12px;\r\n\r\n  .search-input {\r\n    border: 0;\r\n    margin: 0;\r\n    padding: 0;\r\n    flex-grow: 1;\r\n    width: 100%;\r\n    outline: none;\r\n\r\n    &::placeholder {\r\n      color: var(--color-gray-50);\r\n      font-weight: 400;\r\n      font-size: 14px;\r\n    }\r\n  }\r\n\r\n  .search-icon {\r\n    color: var(--color-white);\r\n    stroke: var(--color-gray-50);\r\n    width: 16px;\r\n    height: 16px;\r\n    flex-shrink: 0;\r\n  }\r\n\r\n  &:focus-within {\r\n    border-color: var(--color-gray-60);\r\n  }\r\n}\r\n",
+                    "styleUrl": "./search.component.scss"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "TagComponent",
+            "id": "component-TagComponent-76194495c630bd70363fab3e061b405a3bab3366c73d96510eeaee80e286e39b6fa7b26c13dc6aa39d0160d0a05527eaf7733d214bec64d186db4a58517c2261",
+            "file": "src/app/common/components/tag/tag.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-tag",
+            "styleUrls": [
+                "./tag.component.scss"
+            ],
+            "styles": [],
+            "template": "<span>{{title}}</span>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "theme",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "TagColor",
+                    "decorators": []
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "TagColor",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, ChangeDetectionStrategy, Input, HostBinding } from \"@angular/core\";\r\nimport {TagColor} from \"../../types/tag-color.type\";\r\n\r\n@Component({\r\n  selector: 'app-tag',\r\n  template: `<span>{{title}}</span>`,\r\n  styleUrls: ['./tag.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class TagComponent {\r\n  @HostBinding('class') get class() {\r\n    return this.theme;\r\n  }\r\n\r\n  @Input() title: string;\r\n  @Input() theme: TagColor;\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  font-size: 12px;\r\n  font-weight: 500;\r\n  line-height: 18px;\r\n  padding: 3px 8px;\r\n  border-radius: 4px;\r\n\r\n\r\n  &.purple {\r\n    background-color: var(--color-purple-20);\r\n    color: var(--color-purple-80);\r\n  }\r\n\r\n  &.orange {\r\n    background-color: var(--color-orange-20);\r\n    color: var(--color-orange-80);\r\n  }\r\n\r\n  &.blue {\r\n    background-color: var(--color-blue-20);\r\n    color: var(--color-blue-80);\r\n  }\r\n\r\n  &.pink {\r\n    background-color: var(--color-pink-20);\r\n    color: var(--color-pink-80);\r\n  }\r\n}",
+                    "styleUrl": "./tag.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "accessors": {
+                "class": {
+                    "name": "class",
+                    "getSignature": {
+                        "name": "class",
+                        "type": "",
+                        "returnType": "",
+                        "line": 11
+                    }
+                }
+            }
+        },
+        {
+            "name": "UserListComponent",
+            "id": "component-UserListComponent-605986f4d6dc70c534ff3b17cacdfe7ba22ec00f02287c20b061cc77b80f6931e1aa6a9e48e64c55b1044ab03d6fcdae12c44ab629adf14053bc948acc5f926a",
+            "file": "src/app/user-dashboard/components/user-list/user-list.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-user-list",
+            "styleUrls": [
+                "./user-list.component.scss"
+            ],
+            "styles": [],
+            "template": "<app-user-list-item *ngFor=\"let user of (users$ | async)\"\n  [user]=\"user\">\n</app-user-list-item>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "users$",
+                    "defaultValue": "this.userService.getUsers()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Observable<User[]>",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component } from \"@angular/core\";\r\nimport {Observable, of} from \"rxjs\";\r\nimport {User} from \"src/app/common/models/user.model\";\r\nimport {UserService} from \"../../services/user.service\";\r\n\r\n@Component({\r\n  selector: 'app-user-list',\r\n  template: `\r\n    <app-user-list-item *ngFor=\"let user of (users$ | async)\"\r\n      [user]=\"user\">\r\n    </app-user-list-item>\r\n  `,\r\n  styleUrls: ['./user-list.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class UserListComponent {\r\n  users$: Observable<User[]> = this.userService.getUsers();\r\n\r\n  constructor(private userService: UserService) {}\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./user-list.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "userService",
+                        "type": "UserService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 17,
+                "jsdoctags": [
+                    {
+                        "name": "userService",
+                        "type": "UserService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "UserListItemComponent",
+            "id": "component-UserListItemComponent-da33ef52f67eeb6b6c2e73b440bcf27eef1179ecf3b06c4add5e2c233acb3dd61fa8bca8f490175f0084bca93f2fa0045f8d5974ca3caed5e3892e8f8bf6f31f",
+            "file": "src/app/user-dashboard/components/user-list-item/user-list-item.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-user-list-item",
+            "styleUrls": [
+                "./user-list-item.component.scss"
+            ],
+            "styles": [],
+            "template": "<app-checkbox [(ngModel)]=\"checked\"></app-checkbox>\n<div class=\"user-info\">\n  <app-avatar\n    [src]=\"user.avatar\"></app-avatar>\n  <div class=\"name-email\">\n    <span class=\"name\">{{user.name}}</span>\n    <span class=\"email\">{{user.email}}</span>\n  </div>\n</div>\n<div class=\"permission\">\n  <app-tag\n    [title]=\"formattedRole\"\n    [theme]=\"roleTagColor\">\n  </app-tag>\n</div>\n<div class=\"actions\">\n  <button app-action-icon\n    [iconName]=\"'pencil'\"\n    [title]=\"'Edit'\">\n  </button>\n  <button app-action-icon\n    [iconName]=\"'trash'\">\n  </button>\n</div>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "User",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 42
+                },
+                {
+                    "name": "formattedRole",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 44
+                },
+                {
+                    "name": "roleTagColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TagColor",
+                    "optional": false,
+                    "description": "",
+                    "line": 45
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "\"checked\" | \"\"",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from \"@angular/core\";\r\nimport {User} from \"src/app/common/models/user.model\";\r\nimport {TagColor} from \"src/app/common/types/tag-color.type\";\r\nimport {formatRole, roleTagColorMap} from \"src/app/common/utils/role.util\";\r\n\r\n@Component({\r\n  selector: 'app-user-list-item',\r\n  template: `\r\n    <app-checkbox [(ngModel)]=\"checked\"></app-checkbox>\r\n    <div class=\"user-info\">\r\n      <app-avatar\r\n        [src]=\"user.avatar\"></app-avatar>\r\n      <div class=\"name-email\">\r\n        <span class=\"name\">{{user.name}}</span>\r\n        <span class=\"email\">{{user.email}}</span>\r\n      </div>\r\n    </div>\r\n    <div class=\"permission\">\r\n      <app-tag\r\n        [title]=\"formattedRole\"\r\n        [theme]=\"roleTagColor\">\r\n      </app-tag>\r\n    </div>\r\n    <div class=\"actions\">\r\n      <button app-action-icon\r\n        [iconName]=\"'pencil'\"\r\n        [title]=\"'Edit'\">\r\n      </button>\r\n      <button app-action-icon\r\n        [iconName]=\"'trash'\">\r\n      </button>\r\n    </div>\r\n  `,\r\n  styleUrls: ['./user-list-item.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush\r\n})\r\nexport class UserListItemComponent implements OnInit {\r\n  @HostBinding('class') get class() {\r\n    return this.checked ? 'checked' : '';\r\n  }\r\n  @Input() user: User;\r\n  checked: boolean = false;\r\n\r\n  formattedRole: string;\r\n  roleTagColor: TagColor;\r\n\r\n  ngOnInit() {\r\n    this.formattedRole = formatRole(this.user?.role);\r\n    this.roleTagColor = roleTagColorMap[this.user.role];\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: grid;\r\n  grid-template-columns: auto 1fr 1fr;\r\n  align-items: center;\r\n  gap: 12px;\r\n  position: relative;\r\n  padding: 16px;\r\n  border-radius: 4px;\r\n  border-left: 4px solid transparent;\r\n\r\n  .user-info {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 12px;\r\n    font-size: 14px;\r\n    line-height: 21px;\r\n\r\n    .name-email {\r\n      display: flex;\r\n      flex-direction: column;\r\n    }\r\n\r\n    .name {\r\n      color: var(--color-gray-80);\r\n      font-weight: 500;\r\n    }\r\n\r\n    .email {\r\n      color: var(--color-gray-60);\r\n    }\r\n  }\r\n\r\n  .actions {\r\n    position: absolute;\r\n    right: 16px;\r\n\r\n    display: flex;\r\n    gap: 5px;\r\n    height: 100%;\r\n    align-items: center;\r\n    transform: scale(0);\r\n  }\r\n\r\n  &:hover, &.checked {\r\n    background-color: var(--color-gray-10);\r\n    border-color: var(--color-brand-50);\r\n  }\r\n\r\n  &:hover {\r\n    .actions {\r\n      transform: scale(1);\r\n    }\r\n  }\r\n}",
+                    "styleUrl": "./user-list-item.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "accessors": {
+                "class": {
+                    "name": "class",
+                    "getSignature": {
+                        "name": "class",
+                        "type": "",
+                        "returnType": "",
+                        "line": 38
+                    }
+                }
+            }
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-ac2599bb6a0e13eedf614b867d3683556398b939899e9f2720bba758b10659e7a3c632d3cb9902c014c4b87483f5089a83400c3b5697a3d80d3abaeb447088e8",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport {FormsModule, ReactiveFormsModule} from '@angular/forms';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport {IconSpriteModule} from 'ng-svg-icon-sprite';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport {ActionIconComponent} from './common/components/action-icon/action-icon.component';\r\nimport {AvatarComponent} from './common/components/avatar/avatar.component';\r\nimport {ButtonComponent} from './common/components/button/button.component';\r\nimport {CheckBoxComponent} from './common/components/checkbox/checkbox.component';\r\nimport {SearchComponent} from './common/components/search/search.component';\r\nimport {TagComponent} from './common/components/tag/tag.component';\r\nimport {UserListItemComponent} from './user-dashboard/components/user-list-item/user-list-item.component';\r\nimport {UserListComponent} from './user-dashboard/components/user-list/user-list.component';\r\nimport {UserService} from './user-dashboard/services/user.service';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    ButtonComponent,\r\n    ActionIconComponent,\r\n    SearchComponent,\r\n    TagComponent,\r\n    CheckBoxComponent,\r\n    AvatarComponent,\r\n    UserListItemComponent,\r\n    UserListComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    IconSpriteModule,\r\n    FormsModule,\r\n    ReactiveFormsModule\r\n  ],\r\n  providers: [\r\n    UserService\r\n  ],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": [
+                        {
+                            "name": "UserService"
+                        }
+                    ]
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "ActionIconComponent"
+                        },
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "AvatarComponent"
+                        },
+                        {
+                            "name": "ButtonComponent"
+                        },
+                        {
+                            "name": "CheckBoxComponent"
+                        },
+                        {
+                            "name": "SearchComponent"
+                        },
+                        {
+                            "name": "TagComponent"
+                        },
+                        {
+                            "name": "UserListComponent"
+                        },
+                        {
+                            "name": "UserListItemComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "BlueTag",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/tag/tag.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TagComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Checked",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<UserListItemComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Checked",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CheckBoxComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/avatar/avatar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<AvatarComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/user-dashboard/components/user-list/user-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<UserListComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<UserListItemComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CheckBoxComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "DefaultIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ActionIconComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  production: true\r\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  production: false\r\n}"
+            },
+            {
+                "name": "OrangeTag",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/tag/tag.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TagComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "PinkTag",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/tag/tag.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TagComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "PrimaryButton",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ButtonComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "PurpleTag",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/tag/tag.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TagComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "roleTagColorMap",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/utils/role.util.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "RoleTagColorMap",
+                "defaultValue": "{\r\n  'ADMIN': 'purple',\r\n  'AGENT': 'blue',\r\n  'ACCOUNT_MANAGER': 'pink',\r\n  'EXTERNAL_REVIEWER': 'orange'\r\n}"
+            },
+            {
+                "name": "SearchInput",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/search/search.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SearchComponent>",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/avatar/avatar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<AvatarComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ActionIconComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  template: `\r\n    <button app-action-icon\r\n      [iconName]=\"iconName\"\r\n      [title]=\"title\">\r\n    </button>\r\n  `\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/search/search.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SearchComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ButtonComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  template: '<button app-button-primary>{{text}}</button>'\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/tag/tag.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TagComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/user-dashboard/components/user-list/user-list.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<UserListComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<UserListItemComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CheckBoxComponent>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "TitledIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ActionIconComponent>",
+                "defaultValue": "Template.bind({})"
+            }
+        ],
+        "functions": [
+            {
+                "name": "formatRole",
+                "file": "src/app/common/utils/role.util.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": [
+                    {
+                        "name": "role",
+                        "type": "Role",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "returnType": "string",
+                "jsdoctags": [
+                    {
+                        "name": "role",
+                        "type": "Role",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
+        "typealiases": [
+            {
+                "name": "Role",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"AGENT\" | \"ADMIN\" | \"EXTERNAL_REVIEWER\" | \"ACCOUNT_MANAGER\"",
+                "file": "src/app/common/types/role.type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            },
+            {
+                "name": "RoleTagColorMap",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "",
+                "file": "src/app/common/utils/role.util.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 194
+            },
+            {
+                "name": "TagColor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"pink\" | \"purple\" | \"blue\" | \"orange\"",
+                "file": "src/app/common/types/tag-color.type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            }
+        ],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/app/common/components/tag/tag.component.stories.ts": [
+                {
+                    "name": "BlueTag",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/tag/tag.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TagComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "OrangeTag",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/tag/tag.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TagComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "PinkTag",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/tag/tag.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TagComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "PurpleTag",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/tag/tag.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TagComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/tag/tag.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<TagComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts": [
+                {
+                    "name": "Checked",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<UserListItemComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<UserListItemComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<UserListItemComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/common/components/checkbox/checkbox.component.stories.ts": [
+                {
+                    "name": "Checked",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<CheckBoxComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<CheckBoxComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<CheckBoxComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/common/components/avatar/avatar.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/avatar/avatar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<AvatarComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/avatar/avatar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<AvatarComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/user-dashboard/components/user-list/user-list.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/user-dashboard/components/user-list/user-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<UserListComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/user-dashboard/components/user-list/user-list.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<UserListComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/common/components/action-icon/action-icon.component.stories.ts": [
+                {
+                    "name": "DefaultIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ActionIconComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ActionIconComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  template: `\r\n    <button app-action-icon\r\n      [iconName]=\"iconName\"\r\n      [title]=\"title\">\r\n    </button>\r\n  `\r\n})"
+                },
+                {
+                    "name": "TitledIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ActionIconComponent>",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: true\r\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: false\r\n}"
+                }
+            ],
+            "src/app/common/components/button/button.component.stories.ts": [
+                {
+                    "name": "PrimaryButton",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ButtonComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ButtonComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  template: '<button app-button-primary>{{text}}</button>'\r\n})"
+                }
+            ],
+            "src/app/common/utils/role.util.ts": [
+                {
+                    "name": "roleTagColorMap",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/utils/role.util.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RoleTagColorMap",
+                    "defaultValue": "{\r\n  'ADMIN': 'purple',\r\n  'AGENT': 'blue',\r\n  'ACCOUNT_MANAGER': 'pink',\r\n  'EXTERNAL_REVIEWER': 'orange'\r\n}"
+                }
+            ],
+            "src/app/common/components/search/search.component.stories.ts": [
+                {
+                    "name": "SearchInput",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/search/search.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SearchComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/common/components/search/search.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SearchComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ]
+        },
+        "groupedFunctions": {
+            "src/app/common/utils/role.util.ts": [
+                {
+                    "name": "formatRole",
+                    "file": "src/app/common/utils/role.util.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "role",
+                            "type": "Role",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "returnType": "string",
+                    "jsdoctags": [
+                        {
+                            "name": "role",
+                            "type": "Role",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {
+            "src/app/common/types/role.type.ts": [
+                {
+                    "name": "Role",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"AGENT\" | \"ADMIN\" | \"EXTERNAL_REVIEWER\" | \"ACCOUNT_MANAGER\"",
+                    "file": "src/app/common/types/role.type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                }
+            ],
+            "src/app/common/utils/role.util.ts": [
+                {
+                    "name": "RoleTagColorMap",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "",
+                    "file": "src/app/common/utils/role.util.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 194
+                }
+            ],
+            "src/app/common/types/tag-color.type.ts": [
+                {
+                    "name": "TagColor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"pink\" | \"purple\" | \"blue\" | \"orange\"",
+                    "file": "src/app/common/types/tag-color.type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                }
+            ]
+        }
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DefaultIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/action-icon/action-icon.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "TitledIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/action-icon/action-icon.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ActionIconComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/avatar/avatar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/avatar/avatar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/avatar/avatar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AvatarComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PrimaryButton",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/button/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Checked",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/checkbox/checkbox.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CheckBoxComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/search/search.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SearchInput",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/search/search.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/search/search.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SearchComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/tag/tag.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BlueTag",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/tag/tag.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "OrangeTag",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/tag/tag.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PinkTag",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/tag/tag.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PurpleTag",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/tag/tag.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/components/tag/tag.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TagComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/models/user.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/utils/destroyable.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "Destroyable",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/utils/role.util.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "formatRole",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/common/utils/role.util.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "roleTagColorMap",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Checked",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/components/user-list-item/user-list-item.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/components/user-list-item/user-list-item.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "UserListItemComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/components/user-list/user-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/components/user-list/user-list.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/components/user-list/user-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "UserListComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/user-dashboard/services/user.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "UserService",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}
