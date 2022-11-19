@@ -29,8 +29,19 @@ export class UserListComponent extends Destroyable {
 
     this.userStoreFacade.dispatch.loadUsers();
 
+    this.userStoreFacade.select.selectedUserIds().pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe(ids => {
+      const isAnyUserSelected = !!ids.length;
+      this.masterCheckboxControl.setValue(isAnyUserSelected, { emitEvent: false });
+    });
+
     this.masterCheckboxControl.valueChanges.pipe(
       takeUntil(this.destroyed$)
-    ).subscribe()
+    ).subscribe(checked => {
+      checked ?
+        this.userStoreFacade.dispatch.allUsersSelected() :
+        this.userStoreFacade.dispatch.allUsersDeselected();
+    })
   }
 }

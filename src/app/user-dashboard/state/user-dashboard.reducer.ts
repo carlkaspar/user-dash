@@ -5,7 +5,7 @@ import * as actions from './user-dashboard.actions';
 
 export interface UserDashboardState {
   users: EntityState<User>;
-  selectedUsers: User[];
+  selectedUserIds: number[];
 }
 
 export const adapterUsers = createEntityAdapter<User>({
@@ -14,7 +14,7 @@ export const adapterUsers = createEntityAdapter<User>({
 
 const initialState: UserDashboardState = {
   users: adapterUsers.getInitialState(),
-  selectedUsers: []
+  selectedUserIds: []
 }
 
 export const userDashboardState = createReducer(
@@ -22,5 +22,21 @@ export const userDashboardState = createReducer(
   on(actions.loadUsersSuccess, (state, action) => ({
     ...state,
     users: adapterUsers.setMany(action.users, state.users)
+  })),
+  on(actions.userSelected, (state, action) => ({
+    ...state,
+    selectedUserIds: [...state.selectedUserIds, action.user.id]
+  })),
+  on(actions.userDeselected, (state, action) => ({
+    ...state,
+    selectedUserIds: state.selectedUserIds.filter(id => id !== action.user.id)
+  })),
+  on(actions.allUsersSelected, state => ({
+    ...state,
+    selectedUserIds: state.users.ids as number[]
+  })),
+  on(actions.allUsersDeselected, state => ({
+    ...state,
+    selectedUserIds: []
   }))
 );

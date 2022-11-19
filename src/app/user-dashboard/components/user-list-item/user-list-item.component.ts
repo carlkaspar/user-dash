@@ -1,12 +1,16 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from "@angular/core";
+import {FormControl} from "@angular/forms";
+import {takeUntil} from "rxjs/operators";
 import {User} from "src/app/common/models/user.model";
 import {TagColor} from "src/app/common/types/tag-color.type";
+import {Destroyable} from "src/app/common/utils/destroyable";
 import {formatRole, roleTagColorMap} from "src/app/common/utils/role.util";
+import {UserStoreFacade} from "../../services/user-store.facade";
 
 @Component({
   selector: 'app-user-list-item',
   template: `
-    <app-checkbox [(ngModel)]="checked"></app-checkbox>
+    <app-checkbox [formControl]="userSelectedControl"></app-checkbox>
     <div class="user-info">
       <app-avatar
         [src]="user.avatar"></app-avatar>
@@ -34,18 +38,36 @@ import {formatRole, roleTagColorMap} from "src/app/common/utils/role.util";
   styleUrls: ['./user-list-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserListItemComponent implements OnInit {
+export class UserListItemComponent extends Destroyable implements OnInit {
   @HostBinding('class') get class() {
-    return this.checked ? 'checked' : '';
+    return this.userSelectedControl.value ? 'checked' : '';
   }
   @Input() user: User;
-  checked: boolean = false;
-
+  
+  userSelectedControl = new FormControl(false);
   formattedRole: string;
   roleTagColor: TagColor;
+
+  constructor(private userStoreFacade: UserStoreFacade) {
+    super();
+  }
 
   ngOnInit() {
     this.formattedRole = formatRole(this.user?.role);
     this.roleTagColor = roleTagColorMap[this.user.role];
+
+    this.userSelectedControl.valueChanges.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe(value => {
+      value ?
+        this.userStoreFacade.dispatch.userSelected(this.user) :
+        this.userStoreFacade.dispatch.userDeselected(this.user);
+    });
+
+    this.userStoreFacade.select.isUserSelected(this.user.id).pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe(isSelected => {
+      this.userSelectedControl.setValue(isSelected, { emitEvent: false });
+    })
   }
 }

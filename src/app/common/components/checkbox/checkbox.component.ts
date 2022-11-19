@@ -29,7 +29,7 @@ export class CheckBoxComponent extends Destroyable implements ControlValueAccess
   onBlur: () => {};
 
   writeValue(value: boolean): void {
-    this.checkboxControl.setValue(value);
+    this.checkboxControl.setValue(value, { emitEvent: false });
   }
   registerOnChange(fn: any): void {
     this.checkboxControl.valueChanges.pipe(
