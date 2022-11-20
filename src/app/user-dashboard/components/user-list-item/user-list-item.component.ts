@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit } from "@angular/core";
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2} from "@angular/core";
 import {FormControl} from "@angular/forms";
 import {takeUntil} from "rxjs/operators";
 import {User} from "src/app/common/models/user.model";
@@ -39,16 +39,17 @@ import {UserStoreFacade} from "../../services/user-store.facade";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListItemComponent extends Destroyable implements OnInit {
-  @HostBinding('class') get class() {
-    return this.userSelectedControl.value ? 'checked' : '';
-  }
   @Input() user: User;
   
   userSelectedControl = new FormControl(false);
   formattedRole: string;
   roleTagColor: TagColor;
 
-  constructor(private userStoreFacade: UserStoreFacade) {
+  constructor(
+    private userStoreFacade: UserStoreFacade,
+    private renderer: Renderer2,
+    private elRef: ElementRef
+  ) {
     super();
   }
 
@@ -68,6 +69,9 @@ export class UserListItemComponent extends Destroyable implements OnInit {
       takeUntil(this.destroyed$)
     ).subscribe(isSelected => {
       this.userSelectedControl.setValue(isSelected, { emitEvent: false });
+      isSelected ?
+        this.renderer.addClass(this.elRef.nativeElement, 'checked') :
+        this.renderer.removeClass(this.elRef.nativeElement, 'checked');
     })
   }
 }
