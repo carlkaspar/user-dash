@@ -39,8 +39,8 @@ export class UserStoreFacade {
   dispatch = new (class {
     constructor(private store: Store<UserDashboardState>) {}
 
-    loadUsers(page: number, limit: number) {
-      this.store.dispatch(loadUsers({ page, limit }));
+    loadUsers(start: number, end: number) {
+      this.store.dispatch(loadUsers({ start, end }));
     }
 
     userSelected(user: User) {

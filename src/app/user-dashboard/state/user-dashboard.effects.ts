@@ -11,7 +11,7 @@ export class UserDashboardEffects {
 
   loadUsers$ = createEffect(() => this.actions$.pipe(
     ofType(loadUsers),
-    switchMap(action => this.userService.getUsers(action.page, action.limit).pipe(
+    switchMap(action => this.userService.getUsers(action.start, action.end).pipe(
       map(users => loadUsersSuccess({ users: users as User[] })),
       catchError(error => of(loadUsersFailure({ error })))
     ))

@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getUsers(page: number = 1, limit: number = 10): Observable<User[] | HttpErrorResponse> {
-    return this.httpClient.get<User[]>(this.usersBasePath + `?_page=${page}&_limit=${limit}`);
+  getUsers(start: number = 0, end: number = 9): Observable<User[] | HttpErrorResponse> {
+    return this.httpClient.get<User[]>(this.usersBasePath + `?_start=${start}&_end=${end}`);
   }
 }

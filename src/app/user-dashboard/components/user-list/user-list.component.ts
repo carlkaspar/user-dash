@@ -1,7 +1,7 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, ViewChild } from "@angular/core";
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
-import {fromEvent, map, Observable, startWith, takeUntil, BehaviorSubject, shareReplay, withLatestFrom, of, mergeWith} from "rxjs";
-import {filter, merge, switchMap} from "rxjs/operators";
+import {fromEvent, map, Observable, takeUntil, BehaviorSubject, shareReplay, withLatestFrom, mergeWith} from "rxjs";
+import {debounceTime, filter, switchMap} from "rxjs/operators";
 import {User} from "src/app/common/models/user.model";
 import {Destroyable} from "src/app/common/utils/destroyable";
 import {UserStoreFacade} from "../../services/user-store.facade";
@@ -29,7 +29,7 @@ import {UserStoreFacade} from "../../services/user-store.facade";
     </div>
     <div #listContainer class="list-items-container">
       <ng-container *ngIf="(users$ | async) as users">
-        <app-user-list-item *ngFor="let user of users"
+        <app-user-list-item *ngFor="let user of users; trackBy: trackById"
           [user]="user">
         </app-user-list-item>
       </ng-container>
@@ -49,7 +49,7 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
   private amountOfUsersToAdd$: Observable<number>;
   private loadNextPage$: Observable<void>;
 
-  private currentPage$ = new BehaviorSubject<number>(1);
+  private lastLoadedIndex$ = new BehaviorSubject<number>(0);
   
   @ViewChild('listContainer', { read: ElementRef }) private listContainerElement: ElementRef<HTMLElement>;
 
@@ -57,18 +57,30 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
   selectedUserCount$ = this.userStoreFacade.select.selectedUserCount();
   masterCheckboxControl = new FormControl(false);
 
-  constructor(private userStoreFacade: UserStoreFacade) {
+  constructor(
+    private userStoreFacade: UserStoreFacade,
+    private cd: ChangeDetectorRef
+  ) {
     super();
   }
-    
+
   ngAfterViewInit(): void {
+    // For some reason change detection cycle is not initiated when users$ emits its first value.
+    // The code below is a hack to manually call change detection when the first value is emitted.
+    // Otherwise the first users will not be shown on the site before something else triggers
+    // change detection.
+    this.users$.pipe(
+      filter(val => !!val.length),
+      takeUntil(this.destroyed$)
+    ).subscribe(() => this.cd.detectChanges());
+
     this.handleMasterCheckboxToggle();
 
     this.selectedUserCount$.pipe(takeUntil(this.destroyed$))
       .subscribe(count => this.masterCheckboxControl.setValue(!!count, { emitEvent: false }));
 
     this.userlistContainerHeight$ = this.observeContainerHeight().pipe(
-      startWith(this.listContainerElement.nativeElement.clientHeight),
+      debounceTime(300),
       shareReplay(1)
     );
     this.userCountPerPage$ = this.userlistContainerHeight$.pipe(
@@ -91,9 +103,13 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
       mergeWith(this.loadNextPage$.pipe(switchMap(() => this.userCountPerPage$)))
     );
 
-    this.amountOfUsersToAdd$.pipe(takeUntil(this.destroyed$)).subscribe(usersToAdd => {
-      this.userStoreFacade.dispatch.loadUsers(this.currentPage$.value, usersToAdd);
-      this.currentPage$.next(this.currentPage$.value + 1);
+    this.amountOfUsersToAdd$.pipe(
+      filter(val => val !== 0),
+      takeUntil(this.destroyed$)
+    ).subscribe(usersToAdd => {
+      const untilIndex = this.lastLoadedIndex$.value + usersToAdd;
+      this.userStoreFacade.dispatch.loadUsers(this.lastLoadedIndex$.value, untilIndex);
+      this.lastLoadedIndex$.next(untilIndex);
     });
   }
 
@@ -101,6 +117,10 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
     super.ngOnDestroy();
     this.resizeObserver.disconnect();
   }
+
+  trackById(index: number, user: User) {
+    return user.id;
+  } 
 
   private handleMasterCheckboxToggle() {
     this.masterCheckboxControl.valueChanges.pipe(
