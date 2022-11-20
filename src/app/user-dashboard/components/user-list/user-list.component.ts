@@ -71,6 +71,7 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
     // change detection.
     this.users$.pipe(
       filter(val => !!val.length),
+      mergeWith(this.selectedUserCount$),
       takeUntil(this.destroyed$)
     ).subscribe(() => this.cd.detectChanges());
 
