@@ -24,8 +24,8 @@ import {UserStoreFacade} from "../../services/user-store.facade";
     </div>
     <div class="list-filters">
       <app-checkbox [formControl]="masterCheckboxControl"></app-checkbox>
-      <span>User</span>
-      <span>Permission</span>
+      <button (click)="sortBy('name')">User</button>
+      <button (click)="sortBy('role')">Permission</button>
     </div>
     <div #listContainer class="list-items-container">
       <ng-container *ngIf="(users$ | async) as users">
@@ -50,6 +50,9 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
   private loadNextPage$: Observable<void>;
 
   private lastLoadedIndex$ = new BehaviorSubject<number>(0);
+
+  private sort: 'role' | 'name';
+  private order: 'asc' | 'desc';
   
   @ViewChild('listContainer', { read: ElementRef }) private listContainerElement: ElementRef<HTMLElement>;
 
@@ -109,7 +112,12 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
       takeUntil(this.destroyed$)
     ).subscribe(usersToAdd => {
       const untilIndex = this.lastLoadedIndex$.value + usersToAdd;
-      this.userStoreFacade.dispatch.loadUsers(this.lastLoadedIndex$.value, untilIndex);
+      this.userStoreFacade.dispatch.loadUsers(
+        this.lastLoadedIndex$.value,
+        untilIndex,
+        this.sort,
+        this.order
+      );
       this.lastLoadedIndex$.next(untilIndex);
     });
   }
@@ -121,7 +129,20 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
 
   trackById(index: number, user: User) {
     return user.id;
-  } 
+  }
+
+  sortBy(sort: 'role' | 'name') {
+    const lastSort = this.sort;
+    this.sort = sort;
+
+    if (lastSort !== this.sort) {
+      this.order = 'asc';
+    } else if (this.order === 'asc') {
+      this.order = 'desc';
+    } else {
+      this.order = 'asc';
+    }
+  }
 
   private handleMasterCheckboxToggle() {
     this.masterCheckboxControl.valueChanges.pipe(

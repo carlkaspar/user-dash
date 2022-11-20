@@ -4,7 +4,7 @@ import {User} from "src/app/common/models/user.model";
 
 export const loadUsers = createAction(
   '[User Dashboard] Load users',
-  props<{ start: number, end: number }>()
+  props<{ start: number, end: number, sort: 'role' | 'name', order: 'asc' | 'desc' }>()
 );
 
 export const loadUsersFailure = createAction(
