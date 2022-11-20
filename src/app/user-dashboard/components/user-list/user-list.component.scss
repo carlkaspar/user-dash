@@ -1,6 +1,6 @@
 :host {
   background-color: var(--color-white);
-  padding: 30px;
+  padding: 30px 5px;
   padding-bottom: 5px;
 
   height: calc(100vh - 200px);
@@ -15,7 +15,7 @@
   grid-template-columns: auto 1fr 1fr;
   align-items: center;
   gap: 12px;
-  padding: 5px 16px 5px 20px;
+  padding: 5px 31px 5px 45px;
 
   span {
     font-size: 12px;
@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-left: 20px;
+  padding: 0 25px 20px 45px;
   padding-bottom: 20px;
   background-color: var(--color-white);
 }
@@ -52,6 +52,32 @@
   flex-direction: column;
   flex-grow: 1;
   gap: 4px;
+  padding: 0 25px;
 
   overflow-y: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  position: relative;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-gray-30);
+  border-radius: 2.5px;
+  right: -20px;
+  position: absolute;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-60);
+  border-radius: 2.5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-70);
 }
