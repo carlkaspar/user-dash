@@ -3,7 +3,8 @@ import {createAction, props} from "@ngrx/store";
 import {User} from "src/app/common/models/user.model";
 
 export const loadUsers = createAction(
-  '[User Dashboard] Load users'
+  '[User Dashboard] Load users',
+  props<{ page: number, limit: number }>()
 );
 
 export const loadUsersFailure = createAction(

@@ -10,9 +10,8 @@
   --color-gray-50: #A0AEC0;
   --color-gray-40: #CBD5E0;
   --color-gray-30: #E2E8F0;
+  --color-gray-20: #EDF2F7;
   --color-gray-10: #F7FAFC;
-
-  --color-gray-bg: #E5E5E5;
 
   --color-pink-20: #FEDDEB;
   --color-pink-80: #710C36;
@@ -44,6 +43,6 @@
 }
 
 body {
-  background-color: var(--color-gray-bg);
+  background-color: var(--color-gray-20);
   margin: 0 auto;
 }
