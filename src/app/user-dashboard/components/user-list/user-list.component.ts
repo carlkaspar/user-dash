@@ -1,7 +1,7 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
 import {fromEvent, map, Observable, takeUntil, BehaviorSubject, shareReplay, withLatestFrom, mergeWith, combineLatest, of} from "rxjs";
-import {auditTime, debounceTime, distinctUntilChanged, filter, startWith, switchMap, take} from "rxjs/operators";
+import {auditTime, distinctUntilChanged, filter, startWith, switchMap, take} from "rxjs/operators";
 import {User} from "src/app/common/models/user.model";
 import {Destroyable} from "src/app/common/utils/destroyable";
 import {UserStoreFacade} from "../../services/user-store.facade";
@@ -21,7 +21,8 @@ import {SortBy} from "../../types/sort.type";
           </button>
           <button app-action-icon
             [iconName]="'trash'"
-            [title]="'Delete'">
+            [title]="'Delete'"
+            (click)="deleteAllSelected()">
           </button>
         </div>
       </div>
@@ -105,7 +106,7 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
     const loadUsers$ = lastChildInView$.pipe(
       mergeWith(this.users$.pipe(filter(users => !users.length))),
       switchMap(() => this.userCountPerPage$.pipe(take(1))),
-      auditTime(50)
+      auditTime(50),
     );
 
     loadUsers$.pipe(
@@ -128,6 +129,10 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
   override ngOnDestroy(): void {
     super.ngOnDestroy();
     this.resizeObserver.disconnect();
+  }
+
+  deleteAllSelected(): void {
+    this.userStoreFacade.dispatch.deleteAllSelectedUsers();
   }
 
   trackById(index: number, user: User) {

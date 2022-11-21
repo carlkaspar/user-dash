@@ -31,7 +31,8 @@ import {UserStoreFacade} from "../../services/user-store.facade";
         [title]="'Edit'">
       </button>
       <button app-action-icon
-        [iconName]="'trash'">
+        [iconName]="'trash'"
+        (click)="onDelete()">
       </button>
     </div>
   `,
@@ -73,5 +74,9 @@ export class UserListItemComponent extends Destroyable implements OnInit {
         this.renderer.addClass(this.elRef.nativeElement, 'checked') :
         this.renderer.removeClass(this.elRef.nativeElement, 'checked');
     })
+  }
+
+  onDelete() {
+    this.userStoreFacade.dispatch.deleteUser(this.user.id);
   }
 }

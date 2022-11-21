@@ -44,4 +44,28 @@ export const emptyUserList = createAction(
 export const userSearch = createAction(
   '[User Dashboard] User search',
   props<{ searchValue: string }>()
-)
+);
+
+export const deleteUser = createAction(
+  '[User Dashboard] Delete user',
+  props<{ userId: number }>()
+);
+
+export const deleteUserSuccess = createAction(
+  '[User Dashboard] Delete user success',
+  props<{ userId: number }>()
+);
+
+export const deleteUserFailure = createAction(
+  '[User Dashboard] Delete user failure',
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const deleteAllSelectedUsers = createAction(
+  '[User Dashboard] Delete all selected users'
+);
+
+export const deleteAllSelectedUsersSuccess = createAction(
+  '[User Dashboard] Delete all selected users success',
+  props<{ deletedUserIds: number[] }>()
+);

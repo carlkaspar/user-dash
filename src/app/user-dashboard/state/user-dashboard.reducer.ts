@@ -51,5 +51,15 @@ export const userDashboardState = createReducer(
     users: adapterUsers.getInitialState(),
     selectedUserIds: [],
     searchValue: action.searchValue
+  })),
+  on(actions.deleteUserSuccess, (state, action) => ({
+    ...state,
+    users: adapterUsers.removeOne(String(action.userId), state.users),
+    selectedUserIds: state.selectedUserIds.filter(id => id !== action.userId)
+  })),
+  on(actions.deleteAllSelectedUsersSuccess, (state, action) => ({
+    ...state,
+    selectedUserIds: state.selectedUserIds.filter(id => !action.deletedUserIds.some(deleted => deleted === id)),
+    users: adapterUsers.removeMany(action.deletedUserIds, state.users)
   }))
 );

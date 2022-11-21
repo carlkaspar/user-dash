@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {User} from 'src/app/common/models/user.model';
-import {allUsersDeselected, allUsersSelected, loadUsers, emptyUserList, userDeselected, userSearch, userSelected} from '../state/user-dashboard.actions';
+import {allUsersDeselected, allUsersSelected, loadUsers, emptyUserList, userDeselected, userSearch, userSelected, deleteUser, deleteAllSelectedUsers} from '../state/user-dashboard.actions';
 import {UserDashboardState} from '../state/user-dashboard.reducer';
 import {selectAllUsers, selectedUserCount, selectedUserIds, selectSearchValue, selectUserIsSelected, totalUsersCount} from '../state/user-dashboard.selectors';
 import {OrderBy} from '../types/order.type';
@@ -77,6 +77,14 @@ export class UserStoreFacade {
 
     userSearch(searchValue: string) {
       this.store.dispatch(userSearch({ searchValue }))
+    }
+
+    deleteUser(userId: number) {
+      this.store.dispatch(deleteUser({ userId }))
+    }
+
+    deleteAllSelectedUsers() {
+      this.store.dispatch(deleteAllSelectedUsers())
     }
 
   })(this.store);
