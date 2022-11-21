@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {User} from 'src/app/common/models/user.model';
-import {allUsersDeselected, allUsersSelected, loadUsers, sortUserList, userDeselected, userSelected} from '../state/user-dashboard.actions';
+import {allUsersDeselected, allUsersSelected, loadUsers, emptyUserList, userDeselected, userSearch, userSelected} from '../state/user-dashboard.actions';
 import {UserDashboardState} from '../state/user-dashboard.reducer';
-import {selectAllUsers, selectedUserCount, selectedUserIds, selectUserIsSelected, totalUsersCount} from '../state/user-dashboard.selectors';
+import {selectAllUsers, selectedUserCount, selectedUserIds, selectSearchValue, selectUserIsSelected, totalUsersCount} from '../state/user-dashboard.selectors';
 import {OrderBy} from '../types/order.type';
 import {SortBy} from '../types/sort.type';
 
@@ -36,6 +36,10 @@ export class UserStoreFacade {
       return this.store.pipe(select(selectUserIsSelected(id)));
     }
 
+    searchValue() {
+      return this.store.pipe(select(selectSearchValue))
+    }
+
   })(this.store);
 
   dispatch = new (class {
@@ -45,9 +49,10 @@ export class UserStoreFacade {
       start: number,
       end: number,
       sort: SortBy,
-      order: OrderBy
+      order: OrderBy,
+      search: string
     ) {
-      this.store.dispatch(loadUsers({ start, end, sort, order }));
+      this.store.dispatch(loadUsers({ start, end, sort, order, search }));
     }
 
     userSelected(user: User) {
@@ -66,8 +71,12 @@ export class UserStoreFacade {
       this.store.dispatch(allUsersDeselected());
     }
 
-    sortUserList() {
-      this.store.dispatch(sortUserList());
+    emptyUserList() {
+      this.store.dispatch(emptyUserList());
+    }
+
+    userSearch(searchValue: string) {
+      this.store.dispatch(userSearch({ searchValue }))
     }
 
   })(this.store);

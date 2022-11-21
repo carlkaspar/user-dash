@@ -1,10 +1,12 @@
 import {HttpErrorResponse} from "@angular/common/http";
 import {createAction, props} from "@ngrx/store";
 import {User} from "src/app/common/models/user.model";
+import {OrderBy} from "../types/order.type";
+import {SortBy} from "../types/sort.type";
 
 export const loadUsers = createAction(
   '[User Dashboard] Load users',
-  props<{ start: number, end: number, sort: 'role' | 'name', order: 'asc' | 'desc' }>()
+  props<{ start: number, end: number, sort: SortBy, order: OrderBy, search: string }>()
 );
 
 export const loadUsersFailure = createAction(
@@ -35,6 +37,11 @@ export const allUsersSelected = createAction(
   '[User Dashboard] All users deselected'
 );
 
-export const sortUserList = createAction(
-  '[User Dashboard] Sort user list'
+export const emptyUserList = createAction(
+  '[User Dashboard] Empty user list'
 );
+
+export const userSearch = createAction(
+  '[User Dashboard] User search',
+  props<{ searchValue: string }>()
+)

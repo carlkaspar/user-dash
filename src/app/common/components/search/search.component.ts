@@ -7,7 +7,7 @@ import {Destroyable} from "../../utils/destroyable";
   selector: 'app-search',
   template: `
     <svg-icon-sprite class="search-icon" [src]="searchIconPath"></svg-icon-sprite>
-    <input [formControl]="searchFormControl" (blur)="onTouched") class="search-input" placeholder="Search">
+    <input [formControl]="searchFormControl" (blur)="onTouched" class="search-input" placeholder="Search">
   `,
   styleUrls: ['./search.component.scss'],
   providers: [

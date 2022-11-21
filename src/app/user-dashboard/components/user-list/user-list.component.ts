@@ -62,6 +62,7 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
 
   users$ = this.userStoreFacade.select.users();
   selectedUserCount$ = this.userStoreFacade.select.selectedUserCount();
+  searchValue$ = this.userStoreFacade.select.searchValue();
   masterCheckboxControl = new FormControl(false);
 
   vm$ = combineLatest([
@@ -109,14 +110,16 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
 
     loadUsers$.pipe(
       filter(val => val !== 0),
+      withLatestFrom(this.searchValue$),
       takeUntil(this.destroyed$)
-    ).subscribe(usersToAdd => {
+    ).subscribe(([usersToAdd, searchValue]) => {
       const untilIndex = this.lastLoadedIndex$.value + usersToAdd;
       this.userStoreFacade.dispatch.loadUsers(
         this.lastLoadedIndex$.value,
         untilIndex,
         this.sort,
-        this.order
+        this.order,
+        searchValue
       );
       this.lastLoadedIndex$.next(untilIndex);
     });
@@ -139,7 +142,7 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
     }
     this.sort = sort;
 
-    this.userStoreFacade.dispatch.sortUserList();
+    this.userStoreFacade.dispatch.emptyUserList();
     this.lastLoadedIndex$.next(0);
   }
 

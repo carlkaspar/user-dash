@@ -23,3 +23,8 @@ export const selectedUserCount = createSelector(
   selectedUserIds,
   selectedUserIds => selectedUserIds.length
 );
+
+export const selectSearchValue = createSelector(
+  selectState,
+  state => state.searchValue
+);

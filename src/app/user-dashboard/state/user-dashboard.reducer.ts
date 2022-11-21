@@ -6,6 +6,7 @@ import * as actions from './user-dashboard.actions';
 export interface UserDashboardState {
   users: EntityState<User>;
   selectedUserIds: number[];
+  searchValue: string
 }
 
 export const adapterUsers = createEntityAdapter<User>({
@@ -14,7 +15,8 @@ export const adapterUsers = createEntityAdapter<User>({
 
 const initialState: UserDashboardState = {
   users: adapterUsers.getInitialState(),
-  selectedUserIds: []
+  selectedUserIds: [],
+  searchValue: null
 }
 
 export const userDashboardState = createReducer(
@@ -39,9 +41,15 @@ export const userDashboardState = createReducer(
     ...state,
     selectedUserIds: []
   })),
-  on(actions.sortUserList, state => ({
+  on(actions.emptyUserList, state => ({
     ...state,
     users: adapterUsers.getInitialState(),
     selectedUserIds: []
+  })),
+  on(actions.userSearch, (state, action) => ({
+    ...state,
+    users: adapterUsers.getInitialState(),
+    selectedUserIds: [],
+    searchValue: action.searchValue
   }))
 );
