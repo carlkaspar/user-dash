@@ -1,119 +1,113 @@
 import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild} from "@angular/core";
 import {FormControl} from "@angular/forms";
-import {fromEvent, map, Observable, takeUntil, BehaviorSubject, shareReplay, withLatestFrom, mergeWith} from "rxjs";
-import {debounceTime, filter, switchMap} from "rxjs/operators";
+import {fromEvent, map, Observable, takeUntil, BehaviorSubject, shareReplay, withLatestFrom, mergeWith, combineLatest, of} from "rxjs";
+import {auditTime, debounceTime, distinctUntilChanged, filter, startWith, switchMap, take} from "rxjs/operators";
 import {User} from "src/app/common/models/user.model";
 import {Destroyable} from "src/app/common/utils/destroyable";
 import {UserStoreFacade} from "../../services/user-store.facade";
+import {OrderBy} from "../../types/order.type";
+import {SortBy} from "../../types/sort.type";
 
 @Component({
   selector: 'app-user-list',
   template: `
-    <div class="list-header">
-      <span class="header-count">{{(selectedUserCount$ | async)}} {{(selectedUserCount$ | async) === 1 ? 'user' : 'users'}} selected</span>
-      <div class="header-actions">
-        <button app-action-icon
-          [iconName]="'pencil'"
-          [title]="'Edit'">
+    <ng-container *ngIf="(vm$ | async) as vm">
+      <div class="list-header">
+        <span class="header-count">{{vm.selectedCount}} {{vm.selectedCount === 1 ? 'user' : 'users'}} selected</span>
+        <div class="header-actions">
+          <button app-action-icon
+            [iconName]="'pencil'"
+            [title]="'Edit'">
+          </button>
+          <button app-action-icon
+            [iconName]="'trash'"
+            [title]="'Delete'">
+          </button>
+        </div>
+      </div>
+      <div class="list-filters">
+        <app-checkbox [formControl]="masterCheckboxControl"></app-checkbox>
+        <button class="filter-button" (click)="sortBy('name')">
+          User
+          <span *ngIf="sort === 'name'" class="carret" [ngClass]="{'desc': order === 'desc'}">▼</span>
         </button>
-        <button app-action-icon
-          [iconName]="'trash'"
-          [title]="'Delete'">
+        <button class="filter-button" (click)="sortBy('role')">
+          Permission
+          <span *ngIf="sort === 'role'" class="carret" [ngClass]="{'desc': order === 'desc'}">▼</span>
         </button>
       </div>
-    </div>
-    <div class="list-filters">
-      <app-checkbox [formControl]="masterCheckboxControl"></app-checkbox>
-      <button class="filter-button" (click)="sortBy('name')">
-        User
-        <span *ngIf="sort === 'name'" class="carret" [ngClass]="{'desc': order === 'desc'}">▼</span>
-      </button>
-      <button class="filter-button" (click)="sortBy('role')">
-        Permission
-        <span *ngIf="sort === 'role'" class="carret" [ngClass]="{'desc': order === 'desc'}">▼</span>
-      </button>
-    </div>
-    <div #listContainer class="list-items-container">
-      <ng-container *ngIf="(users$ | async) as users">
-        <app-user-list-item *ngFor="let user of users; trackBy: trackById"
+      <div #listContainer class="list-items-container">
+        <app-user-list-item *ngFor="let user of vm.users; last as last; trackBy: trackById"
+          [id]="last ? LAST_USER_LIST_ITEM_ID : ''"
           [user]="user">
         </app-user-list-item>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
   `,
   styleUrls: ['./user-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent extends Destroyable implements AfterViewInit {
-  private readonly heightOfSingleListItem = 78;
-  private resizeObserver: ResizeObserver;
+  @ViewChild('listContainer', { read: ElementRef }) private listContainerElement: ElementRef<HTMLElement>;
   
+  readonly LAST_USER_LIST_ITEM_ID = 'last-list-item';
+  private readonly HEIHT_OF_LIST_ITEM = 78;
+  private resizeObserver: ResizeObserver;
+
   private userCountPerPage$: Observable<number>;
-  private loadedUsersAmount$ = this.userStoreFacade.select.totalUsersCount();
-
-  private userlistContainerHeight$: Observable<number>;
-  private amountOfUsersToAdd$: Observable<number>;
-  private loadNextPage$: Observable<void>;
-
   private lastLoadedIndex$ = new BehaviorSubject<number>(0);
 
-  sort: 'role' | 'name';
-  order: 'asc' | 'desc';
-  
-  @ViewChild('listContainer', { read: ElementRef }) private listContainerElement: ElementRef<HTMLElement>;
+  sort: SortBy;
+  order: OrderBy;
 
   users$ = this.userStoreFacade.select.users();
   selectedUserCount$ = this.userStoreFacade.select.selectedUserCount();
   masterCheckboxControl = new FormControl(false);
 
+  vm$ = combineLatest([
+    this.users$,
+    this.selectedUserCount$
+  ]).pipe(map(([users, selectedCount]) => ({ users, selectedCount })));
+
   constructor(
     private userStoreFacade: UserStoreFacade,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
   ) {
     super();
   }
 
   ngAfterViewInit(): void {
-    // For some reason change detection cycle is not initiated when users$ emits its first value.
-    // The code below is a hack to manually call change detection when the first value is emitted.
-    // Otherwise the first users will not be shown on the site before something else triggers
-    // change detection.
-    this.users$.pipe(
-      filter(val => !!val.length),
-      mergeWith(this.selectedUserCount$),
-      takeUntil(this.destroyed$)
-    ).subscribe(() => this.cd.detectChanges());
-
+    // For some reason change detection cycle is not initiated when vm$ emits values.
+    this.vm$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.cd.detectChanges());
     this.handleMasterCheckboxToggle();
 
-    this.selectedUserCount$.pipe(takeUntil(this.destroyed$))
-      .subscribe(count => this.masterCheckboxControl.setValue(!!count, { emitEvent: false }));
-
-    this.userlistContainerHeight$ = this.observeContainerHeight().pipe(
-      debounceTime(300),
-      shareReplay(1)
-    );
-    this.userCountPerPage$ = this.userlistContainerHeight$.pipe(
-      map(containerHeight => Math.ceil(containerHeight / this.heightOfSingleListItem)),
+    this.userCountPerPage$ = this.observeContainerHeight().pipe(
+      map(containerHeight => Math.ceil(containerHeight / this.HEIHT_OF_LIST_ITEM) + 1),
       shareReplay(1)
     );
 
-    this.loadNextPage$ = fromEvent(this.listContainerElement.nativeElement, 'scroll').pipe(
-      map(scrollEvent => {
-        const targetElement = scrollEvent.target as HTMLElement;
-        return targetElement.scrollHeight - targetElement.clientHeight - targetElement.scrollTop;
-      }),
-      filter(scrollToBottom => scrollToBottom === 0),
-      map(() => {})
-    );
-    
-    this.amountOfUsersToAdd$ = this.userlistContainerHeight$.pipe(
-      withLatestFrom(this.loadedUsersAmount$),
-      map(([containerHeight, loadedUsersCount]) => this.calculateUsersToFillThePage(containerHeight, loadedUsersCount)),
-      mergeWith(this.loadNextPage$.pipe(switchMap(() => this.userCountPerPage$)))
+    const lastChild$ = this.users$.pipe(
+      map(() => this.listContainerElement.nativeElement.querySelector(`#${this.LAST_USER_LIST_ITEM_ID}`)),
+      filter(child => !!child)
     );
 
-    this.amountOfUsersToAdd$.pipe(
+    const lastChildInView$ = lastChild$.pipe(
+      switchMap(lastChild => {
+        return fromEvent(this.listContainerElement.nativeElement, 'scroll').pipe(
+          map(scrollEvent => this.isLastChildInView(lastChild, scrollEvent.target as Element)),
+          filter(isInView => isInView),
+          take(1)
+        )
+      })
+    );
+
+    const loadUsers$ = lastChildInView$.pipe(
+      mergeWith(this.users$.pipe(filter(users => !users.length))),
+      switchMap(() => this.userCountPerPage$.pipe(take(1))),
+      auditTime(50)
+    );
+
+    loadUsers$.pipe(
       filter(val => val !== 0),
       takeUntil(this.destroyed$)
     ).subscribe(usersToAdd => {
@@ -137,17 +131,13 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
     return user.id;
   }
 
-  sortBy(sort: 'role' | 'name') {
-    const lastSort = this.sort;
-    this.sort = sort;
-
-    if (lastSort !== this.sort) {
+  sortBy(sort: SortBy) {
+    if (this.sort !== sort) {
       this.order = 'asc';
-    } else if (this.order === 'asc') {
-      this.order = 'desc';
     } else {
-      this.order = 'asc';
+      this.order = (this.order === 'asc' ? 'desc' : 'asc');
     }
+    this.sort = sort;
 
     this.userStoreFacade.dispatch.sortUserList();
     this.lastLoadedIndex$.next(0);
@@ -161,25 +151,26 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
         this.userStoreFacade.dispatch.allUsersSelected() :
         this.userStoreFacade.dispatch.allUsersDeselected();
     });
+
+    this.selectedUserCount$.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe(count => this.masterCheckboxControl.setValue(!!count, { emitEvent: false }));
   }
 
   private observeContainerHeight(): Observable<number> {
-    return new Observable(subscriber => {
+    return new Observable<number>(subscriber => {
       this.resizeObserver = new ResizeObserver(entries => {
         subscriber.next(entries[0].target.clientHeight);
       });
 
       this.resizeObserver.observe(this.listContainerElement.nativeElement);
-    });
+    }).pipe(
+      startWith(this.listContainerElement.nativeElement.clientHeight),
+      distinctUntilChanged()
+    );
   }
 
-  private calculateUsersToFillThePage(containerHeight: number, loadedUsersAmount: number): number {
-    const emptySpace = containerHeight - loadedUsersAmount * this.heightOfSingleListItem;
-    
-    if (emptySpace > 0) {
-      return Math.ceil(emptySpace / this.heightOfSingleListItem);
-    } else {
-      return 0
-    }
+  private isLastChildInView(lastChild: Element, listElement: Element): any {
+    return lastChild.getBoundingClientRect().top < listElement.getBoundingClientRect().top + listElement.clientHeight;
   }
 }
