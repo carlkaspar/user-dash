@@ -24,6 +24,13 @@
     stroke: var(--color-gray-50);
     width: 16px;
     height: 16px;
+    transition: 200ms ease-in-out;
+  }
+
+  &.rotate {
+    svg-icon-sprite {
+      transform: rotate(360deg);
+    }
   }
 
   .icon-title {
