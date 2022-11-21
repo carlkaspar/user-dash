@@ -81,6 +81,7 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
   ngAfterViewInit(): void {
     // For some reason change detection cycle is not initiated when vm$ emits values.
     this.vm$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.cd.detectChanges());
+    this.searchValue$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.lastLoadedIndex$.next(0))
     this.handleMasterCheckboxToggle();
 
     this.userCountPerPage$ = this.observeContainerHeight().pipe(
