@@ -38,5 +38,10 @@ export const userDashboardState = createReducer(
   on(actions.allUsersDeselected, state => ({
     ...state,
     selectedUserIds: []
+  })),
+  on(actions.sortUserList, state => ({
+    ...state,
+    users: adapterUsers.getInitialState(),
+    selectedUserIds: []
   }))
 );

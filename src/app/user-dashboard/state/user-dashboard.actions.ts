@@ -34,3 +34,7 @@ export const allUsersDeselected = createAction(
 export const allUsersSelected = createAction(
   '[User Dashboard] All users deselected'
 );
+
+export const sortUserList = createAction(
+  '[User Dashboard] Sort user list'
+);

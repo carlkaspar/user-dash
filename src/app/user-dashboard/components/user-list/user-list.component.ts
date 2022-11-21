@@ -24,8 +24,14 @@ import {UserStoreFacade} from "../../services/user-store.facade";
     </div>
     <div class="list-filters">
       <app-checkbox [formControl]="masterCheckboxControl"></app-checkbox>
-      <button (click)="sortBy('name')">User</button>
-      <button (click)="sortBy('role')">Permission</button>
+      <button class="filter-button" (click)="sortBy('name')">
+        User
+        <span *ngIf="sort === 'name'" class="carret" [ngClass]="{'desc': order === 'desc'}">▼</span>
+      </button>
+      <button class="filter-button" (click)="sortBy('role')">
+        Permission
+        <span *ngIf="sort === 'role'" class="carret" [ngClass]="{'desc': order === 'desc'}">▼</span>
+      </button>
     </div>
     <div #listContainer class="list-items-container">
       <ng-container *ngIf="(users$ | async) as users">
@@ -51,8 +57,8 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
 
   private lastLoadedIndex$ = new BehaviorSubject<number>(0);
 
-  private sort: 'role' | 'name';
-  private order: 'asc' | 'desc';
+  sort: 'role' | 'name';
+  order: 'asc' | 'desc';
   
   @ViewChild('listContainer', { read: ElementRef }) private listContainerElement: ElementRef<HTMLElement>;
 
@@ -142,6 +148,9 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
     } else {
       this.order = 'asc';
     }
+
+    this.userStoreFacade.dispatch.sortUserList();
+    this.lastLoadedIndex$.next(0);
   }
 
   private handleMasterCheckboxToggle() {
