@@ -9,7 +9,7 @@ import {SortBy} from "../types/sort.type";
   providedIn: 'root'
 })
 export class UserService {
-  readonly usersBasePath = 'http://localhost:3000/users';
+  readonly usersBasePath = 'https://kaspar-json-server.herokuapp.com/users';
 
   constructor(private httpClient: HttpClient) {}
 
