@@ -3,7 +3,7 @@
   border: solid 1px var(--color-gray-30);
   border-radius: 4px;
   padding: 0;
-  height: 32px;
+  height: 28px;
 
   display: flex;
   flex-direction: row;
@@ -12,8 +12,8 @@
   box-shadow: 0px 1px 2px rgba(45, 55, 72, 0.08);
 
   .icon-container {
-    height: 32px;
-    width: 32px;
+    height: 25px;
+    width: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,13 +34,29 @@
   }
 
   .icon-title {
-    margin-right: 8px;
+    margin-right: 6px;
     color: var(--color-gray-70);
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   &:hover {
     border-color: var(--color-gray-50);
+  }
+}
+
+@media only screen and (min-width: 550px) {
+  :host {
+    height: 32px;
+
+    .icon-container {
+      height: 32px;
+      width: 32px;
+    }
+
+    .icon-title {
+      margin-right: 8px;
+      font-size: 14px;
+    }
   }
 }

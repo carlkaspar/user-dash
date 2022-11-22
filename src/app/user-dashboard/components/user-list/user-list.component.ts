@@ -52,7 +52,7 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
   @ViewChild('listContainer', { read: ElementRef }) private listContainerElement: ElementRef<HTMLElement>;
   
   readonly LAST_USER_LIST_ITEM_ID = 'last-list-item';
-  private readonly HEIHT_OF_LIST_ITEM = 78;
+  private HEIHT_OF_LIST_ITEM = 78;
   private resizeObserver: ResizeObserver;
 
   private userCountPerPage$: Observable<number>;
@@ -79,6 +79,9 @@ export class UserListComponent extends Destroyable implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if (document.documentElement.offsetWidth < 550) {
+      this.HEIHT_OF_LIST_ITEM = 42;
+    }
     // For some reason change detection cycle is not initiated when vm$ emits values.
     this.vm$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.cd.detectChanges());
     this.searchValue$.pipe(takeUntil(this.destroyed$)).subscribe(() => this.lastLoadedIndex$.next(0))
