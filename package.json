@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm-run-all --parallel serve json-server",
+    "start": "npm-run-all --parallel node-app json-server",
+    "node-app": "node server.js",
     "serve": "ng serve",
     "build": "ng build",
+    "heroku-postbuild": "ng build — prod",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
@@ -14,6 +16,7 @@
     "generate:svg-sprite": "svg2sprite ./src/assets/svg ./src/assets/sprites/sprite.svg --stripAttrs fill --stripAttrs stroke --stripAttrs id",
     "json-server": "json-server ./mock-data/user.json"
   },
+  "engines": { "node": "16.13.2", "npm": "8.1.2" },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
@@ -31,7 +34,10 @@
     "ng-svg-icon-sprite": "^1.12.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@angular/cli": "~14.2.4",
+    "@angular/compiler-cli": "^14.2.0",
+    "typescript": "~4.7.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.4",
