@@ -1,21 +1,22 @@
 :host {
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 15px;
   margin: 0 auto;
-  height: calc(100vh - 60px);
+  height: 100vh;
   max-width: 1000px;
 
   background-color: var(--color-gray-20);
 
   .dashboard-header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 0 30px;
+    margin: 10px 0 10px;
 
     .title {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 27px;
       font-weight: 500;
       color: var(--color-gray-90);
@@ -26,5 +27,20 @@
     display: flex;
     gap: 10px;
     align-items: center;
+  }
+}
+
+@media only screen and (min-width: 550px) {
+  :host {
+    padding: 30px;
+    height: calc(100vh - 60px);
+
+    .dashboard-header {
+      margin: 30px 0 30px;
+
+      .title {
+        font-size: 18px;
+      }
+    }
   }
 }

@@ -1,15 +1,28 @@
 :host {
-  height: 32px;
-  width: 32px;
+  height: 28px;
+  width: 28px;
 
   .avatar-image {
-    height: 32px;
-    width: 32px;
+    height: 28px;
+    width: 28px;
     object-fit: cover;
     border-radius: 100%;
   }
 
   .hidden {
     visibility: hidden;
+  }
+}
+
+
+@media only screen and (min-width: 550px) {
+  :host {
+    height: 32px;
+    width: 32px;
+
+    .avatar-image {
+      height: 32px;
+      width: 32px;
+    }
   }
 }

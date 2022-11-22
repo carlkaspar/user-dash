@@ -1,10 +1,13 @@
 :host {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
-  line-height: 18px;
-  padding: 3px 8px;
+  line-height: 16px;
+  padding: 2px 4px;
   border-radius: 4px;
 
+  span {
+    white-space: nowrap;
+  }
 
   &.purple {
     background-color: var(--color-purple-20);
@@ -24,5 +27,13 @@
   &.pink {
     background-color: var(--color-pink-20);
     color: var(--color-pink-80);
+  }
+}
+
+@media only screen and (min-width: 550px) {
+  :host {
+    font-size: 12px;
+    line-height: 18px;
+    padding: 3px 8px;
   }
 }

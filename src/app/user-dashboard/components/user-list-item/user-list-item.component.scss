@@ -1,19 +1,19 @@
 :host {
-  display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   position: relative;
-  padding: 16px;
+  padding: 5px;
   border-radius: 4px;
   border-left: 4px solid transparent;
 
   .user-info {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    line-height: 21px;
+    gap: 8px;
+    font-size: 12px;
+    line-height: 16px;
 
     .name-email {
       display: flex;
@@ -28,6 +28,12 @@
     .email {
       color: var(--color-gray-60);
     }
+  }
+
+  .permission {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .actions {
@@ -49,6 +55,26 @@
   &:hover {
     .actions {
       transform: scale(1);
+    }
+  }
+}
+
+@media only screen and (min-width: 550px) {
+  :host {
+    padding: 16px;
+    gap: 12px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto 1fr 1fr;
+
+    .user-info {
+      gap: 12px;
+      font-size: 14px;
+      line-height: 21px;
+    }
+
+    .permission {
+      display: block;
     }
   }
 }
