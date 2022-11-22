@@ -5,3 +5,6 @@ This project is written using Angular 14, Storybook, and uses json-server as a m
 - `cd user-dash`
 - `npm install`
 - `npm start`
+
+## Site hosted on heroku
+https://kaspar-user-dash.herokuapp.com/
