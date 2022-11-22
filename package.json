@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm-run-all --parallel node-app json-server",
-    "node-app": "node server.js",
+    "start": "node server.js",
     "serve": "ng serve",
     "build": "ng build",
     "heroku-postbuild": "ng build",
