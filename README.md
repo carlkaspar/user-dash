@@ -5,6 +5,3 @@ This project is written using Angular 14, Storybook, and uses json-server as a m
 - `cd user-dash`
 - `npm install`
 - `npm start`
-
-To run the mock backend, open another terminal window and run:
-- `npm run json-server`
